@@ -11,7 +11,7 @@ import SwiftUI
 struct QClapApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ClapperBoardView(production: "", sceneNumber: "1", takeNumber: "1", rollNumber: 1, cameraNumber: "CAM1")
         }
     }
 }
