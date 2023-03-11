@@ -1,5 +1,8 @@
 # QClap
 
+*March 2022 Update: iPad Screen is still too reflective and not bright enough.*
+*Use a regular slate and Azure video indexer instead :)*
+
 This is a lightweight Clapperboard app for iPadOS with dynamic QR Code built in to encode all scene information. 
 
 This project includes the iPadOS client and a desktop client to scan QR codes in video footages and rename/categorize based on user defined rules. The desktop client app is in closed development and will come soon 
