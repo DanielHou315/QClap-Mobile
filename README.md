@@ -4,6 +4,7 @@
 
 **Use a regular slate and Azure video indexer instead :)**
 
+---
 
 This is a lightweight Clapperboard app for iPadOS with dynamic QR Code built in to encode all scene information. 
 
