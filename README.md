@@ -1,7 +1,8 @@
 # QClap
 
-*March 2022 Update: iPad Screen is still too reflective and not bright enough.*
-*Use a regular slate and Azure video indexer instead :)*
+**March 2022 Update: iPad Screen is still too reflective and not bright enough.**
+**Use a regular slate and Azure video indexer instead :)**
+
 
 This is a lightweight Clapperboard app for iPadOS with dynamic QR Code built in to encode all scene information. 
 
