@@ -1,6 +1,7 @@
 # QClap
 
 **March 2022 Update: iPad Screen is still too reflective and not bright enough.**
+
 **Use a regular slate and Azure video indexer instead :)**
 
 
