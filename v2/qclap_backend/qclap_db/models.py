@@ -5,7 +5,7 @@ import json
 from django.core import serializers
 
 
-MAX_DESC_LEN = 65535
+MAX_DESC_LEN = 512
 
 
 class VideoMetadata(models.Model):
