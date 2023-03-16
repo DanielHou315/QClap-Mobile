@@ -1,9 +1,9 @@
 # QClap
 
 ## Updates:
-** March 2022 Update: I am moving towards v2, which is cross-platform and cloud-based. **
-**March 2022 Update: iPad Screen is still too reflective and not bright enough.**
-** If you want a stable cloud solution, Azure Video Indexer may be viable. **
+*March 2022 Update: I am moving towards v2, which is cross-platform and cloud-based.*
+
+*March 2022 Update: iPad Screen is still too reflective and not bright enough.If you want a stable cloud solution, Azure Video Indexer may be viable.*
 ---
 
 # QClap v2
