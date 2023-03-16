@@ -8,6 +8,9 @@ from .models import VideoMetadata
 from .lib import *
 
 
+def ping(request):
+    return JsonResponse({"message": "pong"}, status=200)
+
 @csrf_exempt
 def create_video_metadata(request):
     if request.method == 'POST':

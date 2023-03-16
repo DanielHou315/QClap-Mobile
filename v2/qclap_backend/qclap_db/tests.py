@@ -51,7 +51,6 @@ class VideoMetadataTestCase(APITestCase):
         self.url_get = reverse('get_video_metadata', kwargs={'id': self.video_metadata_id})
         self.url_list = reverse('get_video_metadata_list')
 
-
     def test_create_video_metadata(self):
         self.client.login(username=self.user.username, password='Hhd19293949')
         data = {
