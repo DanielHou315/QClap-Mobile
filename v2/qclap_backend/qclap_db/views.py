@@ -11,6 +11,21 @@ from .lib import *
 def ping(request):
     return JsonResponse({"message": "pong"}, status=200)
 
+def auth(request):
+    if request.method == 'GET':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        if not username or not password:
+            return HttpResponseBadRequest("username and password are required", status=400)
+
+        user = authenticate(username=username, password=password)
+        if user is None:
+            return HttpResponseBadRequest("Wrong username or Password", status=401)
+        return JsonResponse({"message": "OK"}, status=200)
+
+    else:
+        return HttpResponseBadRequest("Only GET requests are allowed", status=405)
+
 @csrf_exempt
 def create_video_metadata(request):
     if request.method == 'POST':
