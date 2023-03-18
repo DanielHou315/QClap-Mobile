@@ -4,7 +4,8 @@ import 'dart:math';
 import 'dart:async';
 import 'package:qclap/qclap_request.dart';
 import 'package:qclap/video.dart';
-import 'package:provider/provider.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 // QClap App Bar
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -115,43 +116,39 @@ class TextDisplayField extends StatefulWidget {
 class _TextDisplayFieldState extends State<TextDisplayField> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<UpdateStatus>(
-      builder: (context, updatestatus, child) {
-        // final width =
-        //     MediaQuery.of(context).size.width * widget.widthPercentage / 100;
-        final height =
-            MediaQuery.of(context).size.height * widget.heightPercentage / 100;
-        final double inputFontSize = height * 0.4;
+    // final width =
+    //     MediaQuery.of(context).size.width * widget.widthPercentage / 100;
+    final height =
+        MediaQuery.of(context).size.height * widget.heightPercentage / 100;
+    final double inputFontSize = height * 0.4;
 
-        return Container(
-          // width: width,
-          height: height,
-          decoration: BoxDecoration(
-              // border: Border.all(
-              //   color: Colors.grey[300]!,
-              //   width: 1,
-              // ),
-              ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.fixedText,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                widget.textDisplay,
-                style: TextStyle(
-                  fontSize: inputFontSize,
-                ),
-              ),
-            ],
+    return Container(
+      // width: width,
+      height: height,
+      decoration: BoxDecoration(
+          // border: Border.all(
+          //   color: Colors.grey[300]!,
+          //   width: 1,
+          // ),
           ),
-        );
-      }
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget.fixedText,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            widget.textDisplay,
+            style: TextStyle(
+              fontSize: inputFontSize,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -162,7 +159,7 @@ class CustomTextField extends StatefulWidget {
   final double heightPercentage;
   final String fixedText;
   String textInput = '';
-  bool infoUpdateBit;
+  final String storeKey;
 
   CustomTextField({
     Key? key,
@@ -170,7 +167,7 @@ class CustomTextField extends StatefulWidget {
     required this.heightPercentage,
     required this.fixedText,
     required this.textInput,
-    required this.infoUpdateBit,
+    required this.storeKey,
   }) : super(key: key);
 
   @override
@@ -178,6 +175,16 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
+  Future<void> _setPref(String value) async {
+    // perform some asynchronous operation
+    // and return the result
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(widget.storeKey, value);
+    setState(() {
+      widget.textInput = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // final width =
@@ -199,9 +206,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            widget.fixedText + widget.infoUpdateBit.toString(),
+            widget.fixedText,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 14,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -214,10 +221,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               border: InputBorder.none,
             ),
             onChanged: (value) {
-              setState(() {
-                widget.textInput = value;
-                widget.infoUpdateBit = true;
-              });
+              _setPref(value);
             },
           ),
         ],
@@ -230,15 +234,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
 class QRCodeWidget extends StatefulWidget {
   final double widthPercentage;
   final double heightPercentage;
-  bool infoUpdateBit;
-
-  String data;
 
   QRCodeWidget({
     required this.widthPercentage,
     required this.heightPercentage,
-    required this.infoUpdateBit,
-    required this.data,
   });
 
   @override
@@ -246,16 +245,24 @@ class QRCodeWidget extends StatefulWidget {
 }
 
 class _QRCodeWidgetState extends State<QRCodeWidget> {
+  String data = 'https://qclap.danielhou.me/api/api1/ping/';
   @override
   void initState() {
-    widget.data = 'https://qclap.danielhou.me/0/';
+    data = 'https://qclap.danielhou.me/api/api1/ping/';
     super.initState();
   }
 
-  void updateData(String newData) {
-    setState(() {
-      widget.data = newData;
-    });
+  Future<void> updateQR() async {
+    print("In Update Function");
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    VideoMetadata newMeta = VideoMetadata.fromStorage(pref);
+    String rtn = await requestPost(newMeta);
+    print("Received String");
+    if (rtn != "error") {
+      setState(() {
+        data = rtn;
+      });
+    }
   }
 
   @override
@@ -263,33 +270,41 @@ class _QRCodeWidgetState extends State<QRCodeWidget> {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.height;
     final qrSize =
-        min(screenHeight * widget.widthPercentage / 100, screenWidth * 0.6);
+        min(screenHeight * widget.widthPercentage / 100, screenWidth * 0.5);
 
-    if (widget.infoUpdateBit == false) {
-      return SizedBox(
-        width: qrSize,
-        height: qrSize,
-        child: QrImage(
-          data: widget.data,
-          version: QrVersions.auto,
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
+    return Column(
+      children: [
+        TextButton(
+          style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+            minimumSize:
+                MaterialStateProperty.all(Size(150, 30)), // set button size
+            textStyle: MaterialStateProperty.all(
+                TextStyle(fontSize: 16)), // set font size
+            overlayColor: MaterialStateProperty.all(Colors.black.withOpacity(
+                0.2)), // set overlay color to black with 20% opacity
+          ),
+          onPressed: () {
+            updateQR();
+          },
+          child: Text('Update QR'),
         ),
-      );
-    } else {
-      return GestureDetector(
-        onTap: () {
-          // Callback function to be executed on tap
-          print('SizedBox was tapped!');
-        },
-        child: SizedBox(
-            width: qrSize,
-            height: qrSize,
-            child: Text(
-              "Tap to Get QR Code",
-            )),
-      );
-    }
+        const SizedBox(
+          height: 5
+        ),
+        SizedBox(
+          width: qrSize,
+          height: qrSize,
+          child: QrImage(
+            data: data,
+            version: QrVersions.auto,
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
+          ),
+        )
+      ],
+    );
   }
 }
 
@@ -339,7 +354,7 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
   }
 
   Widget _buildDateTimeText(String text, {Color? color}) {
-    double timeFontSize = MediaQuery.of(context).size.width * 0.04;
+    double timeFontSize = MediaQuery.of(context).size.height * 0.04;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 2.0),
       child: FittedBox(

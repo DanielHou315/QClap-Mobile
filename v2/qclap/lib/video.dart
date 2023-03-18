@@ -2,30 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class VideoMetadata {
-  int slateNumber = 1;
+  String slateNumber = "1";
 
   // Production Information
-  String productionTitle = "";
-  String director = "";
+  String productionTitle = "N/A";
+  String director = "N/A";
 
   // Scene Information
   String scene = "1";
   String shot = "1";
-  int take = 1;
+  String take = "1";
 
   // Camera Info
-  int cameraNumber = 1;
-  String cameraMan = "";
+  String cameraNumber = "1";
+  String cameraMan = "N/A";
 
-  double fps = 30.00;
-  int width = 1920;
-  int height = 1080;
+  String fps = "60.00";
+  String width = "3840";
+  String height = "2160";
 
-  String? isoSpeed = "2000";
-  String? focalLength = "80 mm";
-  String? lens = "N/A";
-
-  int dateTime = -1;
+  String isoSpeed = "-1";
+  String focalLength = "80 mm";
+  String lens = "N/A";
 
   VideoMetadata();
 
@@ -43,29 +41,27 @@ class VideoMetadata {
       this.height,
       this.isoSpeed,
       this.focalLength,
-      this.lens,
-      this.dateTime);
+      this.lens);
 
   VideoMetadata.fromStorage(SharedPreferences prefs) {
-    slateNumber = prefs.getInt('slateNumber') ?? slateNumber;
+    slateNumber = prefs.getString('slateNumber') ?? slateNumber;
     productionTitle = prefs.getString('productionTitle') ?? productionTitle;
     director = prefs.getString('director') ?? director;
 
     scene = prefs.getString('scene') ?? scene;
     shot = prefs.getString('shot') ?? shot;
-    take = prefs.getInt('take') ?? take;
+    take = prefs.getString('take') ?? take;
 
-    cameraNumber = prefs.getInt('cameraNumber') ?? cameraNumber;
+    cameraNumber = prefs.getString('cameraNumber') ?? cameraNumber;
     cameraMan = prefs.getString('cameraMan') ?? cameraMan;
 
-    fps = prefs.getDouble('fps') ?? fps;
-    width = prefs.getInt('width') ?? width;
-    height = prefs.getInt('height') ?? height;
+    fps = prefs.getString('fps') ?? fps;
+    width = prefs.getString('width') ?? width;
+    height = prefs.getString('height') ?? height;
 
     isoSpeed = prefs.getString('isoSpeed') ?? isoSpeed;
     focalLength = prefs.getString('focalLength') ?? focalLength;
     lens = prefs.getString('lens') ?? lens;
-    dateTime = prefs.getInt('dateTime') ?? dateTime;
   }
 }
 

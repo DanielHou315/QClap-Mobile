@@ -1,10 +1,6 @@
-// import 'package:flutter/material.dart';
-import 'dart:html';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:qclap/video.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:qclap/qclap_widgets.dart';
 
@@ -41,36 +37,36 @@ class QClapHome extends StatefulWidget {
 
 class _QClapHomeState extends State<QClapHome> {
   VideoMetadata videoMeta = VideoMetadata();
-  String clipLink = "https://qclap.danielhou.me/0/";
+  String clipLink = "https://qclap.danielhou.me/api/api1/ping/";
 
   Future<void> _buildVideoMeta() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     videoMeta = VideoMetadata.fromStorage(prefs);
   }
 
-  void _setSceneNumber(String newSceneNumber) {
-    setState(() {
-      videoMeta.scene = newSceneNumber;
-    });
-  }
+  // void _setSceneNumber(String newSceneNumber) {
+  //   setState(() {
+  //     videoMeta.scene = newSceneNumber;
+  //   });
+  // }
 
-  void _setShotNumber(String newShotNumber) {
-    setState(() {
-      videoMeta.shot = newShotNumber;
-    });
-  }
+  // void _setShotNumber(String newShotNumber) {
+  //   setState(() {
+  //     videoMeta.shot = newShotNumber;
+  //   });
+  // }
 
-  void _incrementTakeNumber() {
-    setState(() {
-      videoMeta.take++;
-    });
-  }
+  // void _incrementTakeNumber() {
+  //   setState(() {
+  //     videoMeta.take++;
+  //   });
+  // }
 
-  void _decrementTakeNumber() {
-    setState(() {
-      videoMeta.take--;
-    });
-  }
+  // void _decrementTakeNumber() {
+  //   setState(() {
+  //     videoMeta.take--;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +88,7 @@ class _QClapHomeState extends State<QClapHome> {
                       heightPercentage: 20,
                       fixedText: "Scene",
                       textInput: videoMeta.scene.padLeft(2, '0'),
-                      infoUpdateBit: widget.infoUpdateBit,
+                      storeKey: "scene",
                     ),
                   ),
                   Flexible(
@@ -101,7 +97,7 @@ class _QClapHomeState extends State<QClapHome> {
                       heightPercentage: 20,
                       fixedText: "Shot",
                       textInput: videoMeta.shot.padLeft(2, '0'),
-                      infoUpdateBit: widget.infoUpdateBit,
+                      storeKey: "shot",
                     ),
                   ),
                   Flexible(
@@ -110,7 +106,7 @@ class _QClapHomeState extends State<QClapHome> {
                       heightPercentage: 20,
                       fixedText: "Take",
                       textInput: videoMeta.take.toString().padLeft(2, '0'),
-                      infoUpdateBit: widget.infoUpdateBit,
+                      storeKey: "take",
                     ),
                   ),
                 ],
@@ -141,7 +137,7 @@ class _QClapHomeState extends State<QClapHome> {
                                 heightPercentage: 18,
                                 fixedText: "Director",
                                 textInput: videoMeta.director,
-                                infoUpdateBit: widget.infoUpdateBit,
+                                storeKey: "director",
                               ),
                             ),
                             Flexible(
@@ -152,7 +148,7 @@ class _QClapHomeState extends State<QClapHome> {
                                 textInput: videoMeta.slateNumber
                                     .toString()
                                     .padLeft(2, '0'),
-                                infoUpdateBit: widget.infoUpdateBit,
+                                storeKey: "slateNumber",
                               ),
                             ),
                           ],
@@ -168,7 +164,7 @@ class _QClapHomeState extends State<QClapHome> {
                                 heightPercentage: 18,
                                 fixedText: "Cam Man",
                                 textInput: videoMeta.cameraMan.padLeft(2, '0'),
-                                infoUpdateBit: widget.infoUpdateBit,
+                                storeKey: "cameraMan",
                               ),
                             ),
                             Flexible(
@@ -179,7 +175,7 @@ class _QClapHomeState extends State<QClapHome> {
                                 textInput: videoMeta.cameraNumber
                                     .toString()
                                     .padLeft(2, '0'),
-                                infoUpdateBit: widget.infoUpdateBit,
+                                storeKey: "camera",
                               ),
                             ),
                           ],
@@ -210,8 +206,8 @@ class _QClapHomeState extends State<QClapHome> {
                                 textDisplay: videoMeta.fps.toString().padLeft(2, '0'),
                               ),
                             ),
-                            SizedBox(
-                              width: 100.0,
+                            const SizedBox(
+                              width: 170.0,
                             ),
                             Flexible(
                               child: TextDisplayField(
@@ -235,8 +231,8 @@ class _QClapHomeState extends State<QClapHome> {
                                 textDisplay: videoMeta.isoSpeed.toString().padLeft(2, '0'),
                               ),
                             ),
-                            SizedBox(
-                              width: 100.0,
+                            const SizedBox(
+                              width: 120.0,
                             ),
                             Flexible(
                               child: TextDisplayField(
@@ -246,27 +242,25 @@ class _QClapHomeState extends State<QClapHome> {
                                 textDisplay: videoMeta.lens.toString().padLeft(2, '0'),
                               ),
                             ),
-
-                            Flexible(
-                              child: TextDisplayField(
-                                // widthPercentage: 25,
-                                heightPercentage: 12,
-                                fixedText: "Lens",
-                                textDisplay: widget.infoUpdateBit.toString().padLeft(2, '0'),
-                              ),
-                            ),
                           ],
-                        ),
-
-                        
+                        ),                        
                       ]),
                     ),
                     // QR Code Section
-                    QRCodeWidget(
-                        widthPercentage: 100,
-                        heightPercentage: 100,
-                        infoUpdateBit: widget.infoUpdateBit,
-                        data: clipLink),
+                    Column (
+                      children: [
+                        const SizedBox(
+                          height: 3
+                        ),
+                        QRCodeWidget(
+                          widthPercentage: 90,
+                          heightPercentage: 90,
+                        ),
+                        const SizedBox(
+                          height: 3
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               )

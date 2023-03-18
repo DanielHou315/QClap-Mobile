@@ -38,28 +38,32 @@ def create_video_metadata(request):
         if user is None:
             return HttpResponseBadRequest("Wrong username or Password", status=401)
 
-        # try:
-        metadata = VideoMetadata(
-            slate_number=request.POST.get('slate_number', 0),
-            production_title=request.POST.get('production_title', '<Title>'),
-            director=request.POST.get('director', '<Director>'),
-            scene=request.POST.get('scene', '0'),
-            shot=request.POST.get('shot', '0'),
-            take=request.POST.get('take', 0),
-            camera_number=request.POST.get('camera_number', 0),
-            camera_man=request.POST.get('camera_man', '<CameraMan>'),
-            fps=request.POST.get('fps', 30.00),
-            width=request.POST.get('width', 1920),
-            height=request.POST.get('height', 1080),
-            iso_speed=request.POST.get('iso_speed', None),
-            focal_length=request.POST.get('focal_length', None),
-            lens=request.POST.get('lens', None),
-            user=user,
-        )
+        try:
+            metadata = VideoMetadata(
+                slate_number=request.POST.get('slate_number', 0),
+                production_title=request.POST.get('production_title', '<Title>'),
+                director=request.POST.get('director', '<Director>'),
+
+                scene=request.POST.get('scene', '0'),
+                shot=request.POST.get('shot', '0'),
+                take=request.POST.get('take', 0),
+
+                camera_number=request.POST.get('camera_number', 0),
+                camera_man=request.POST.get('camera_man', '<CameraMan>'),
+
+                fps=request.POST.get('fps', 30.00),
+                width=request.POST.get('width', 1920),
+                height=request.POST.get('height', 1080),
+
+                iso_speed=request.POST.get('iso_speed', None),
+                focal_length=request.POST.get('focal_length', None),
+                lens=request.POST.get('lens', None),
+                user=user,
+            )
         metadata.save()
         return JsonResponse({"metadata_url": read_root_url() + "api/v1/vm/" + str(metadata.id) + "/"}, status=201)
-        # except Exception:
-        #     return HttpResponseBadRequest("Error creating VideoMetadata", status=422)
+        except:
+            return HttpResponseBadRequest("Error creating VideoMetadata", status=422)
     else:
         return HttpResponseBadRequest("Only POST requests are allowed", status=405)
 
