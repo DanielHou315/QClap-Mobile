@@ -7,7 +7,9 @@
 
 ---
 
-# QClap v2
+# QClap v2 and beyond
+
+Please look at the [QClap Organization](https://github.com/QClap) for the latest releases!
 
 ---
 # QClap v1
