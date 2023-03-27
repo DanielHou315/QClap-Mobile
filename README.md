@@ -1,18 +1,17 @@
 # QClap
 
-## Updates:
-*March 2022 Update: I am moving towards v2, which is cross-platform and cloud-based.*
-
-*March 2022 Update: iPad Screen is still too reflective and not bright enough. If you want a stable cloud solution, Azure Video Indexer may be viable.*
-
----
-
 # QClap v2 and beyond
 
 Please look at the [QClap Organization](https://github.com/QClap) for the latest releases!
 
----
 # QClap v1
+
+---
+## Updates:
+*March 2022 Update: I am moving towards v2, which is cross-platform and cloud-based.*
+
+*March 2022 Update: iPad Screen is still too reflective and not bright enough. If you want a stable cloud solution, Azure Video Indexer may be viable.*
+---
 
 This is a lightweight Clapperboard app for iPadOS with dynamic QR Code built in to encode all scene information. 
 
