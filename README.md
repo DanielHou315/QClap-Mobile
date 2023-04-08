@@ -1,6 +1,6 @@
 # QClap v2 and beyond
 
-Please look at the [QClap Organization](https://github.com/QClap) for the latest releases!
+Please look at the [QClap Organization](https://github.com/QClap) for the latest releases! This app is currently under closed development, and Alpha will be released soon depending on the progress. 
 
 # QClap v1
 
