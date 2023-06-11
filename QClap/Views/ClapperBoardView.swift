@@ -39,6 +39,9 @@ struct ClapperBoardView: View {
         return UIImage(systemName: "xmark.circle") ?? UIImage()
     }
     
+    
+    
+    
     var body: some View {
         // Main View
         HStack{

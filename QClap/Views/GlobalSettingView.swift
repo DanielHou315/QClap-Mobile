@@ -7,9 +7,31 @@
 
 import SwiftUI
 
+
+//struct GlobalSettingButton: ToolBarItem {
+//    var body: some ToolbarItem {
+//
+//    }
+//}
+
+
 struct GlobalSettingView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            VStack {
+                NavigationLink {
+                    Text("Detail")
+                } label: {
+                    Text("Hello, world!")
+                }
+            }
+            .toolbar {
+                ProjectListToolbar()
+            }
+            .padding()
+            .navigationTitle("Projects")
+            // .navigationBarTitleDisplayMode(.inline)
+        }
     }
 }
 
