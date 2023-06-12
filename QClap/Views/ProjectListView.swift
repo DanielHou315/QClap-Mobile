@@ -9,47 +9,14 @@ import SwiftUI
 
 struct ProjectListToolbar: ToolbarContent {
     var body: some ToolbarContent {
-//        ToolbarItem(placement: .navigationBarLeading) {
-//            Button("Save") {
-//                print("save document")
-//            }
-//        }
         
-        // Projects PageNotification Popup
+        // Projects Page Notification Popup
         ToolbarItem {
-            Button(
-                action: {
-                    print("notifications")
-                },
-                label: {
-                    Image(systemName: "bell")
-                }
-            )
+            NotificationButton()
         }
-        
-        // Share Database Button
-        ToolbarItem {
-            Button(
-                action: {
-                    print("export")
-                },
-                label: {
-                    Image(systemName: "square.and.arrow.up")
-                }
-            )
-        }
-        
         // Project Page Settings Button (Global)
         ToolbarItem {
-            Button(
-                action: {
-                    print("dir->settings")
-                },
-                label: {
-                    Image(systemName: "gearshape")
-                    // Text("Settings")
-                }
-            )
+            GlobalSettingButton()
         }
     }
 }

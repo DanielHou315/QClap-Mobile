@@ -31,6 +31,11 @@ struct GlobalSettingButton: View {
                 Image(systemName: "gear")
             }
         )
+//        NavigationView {
+//           NavigationLink(destination: GlobalSettingView()) {
+//              Text("Press on me")
+//           }.buttonStyle(PlainButtonStyle())
+//        }
     }
 }
 
