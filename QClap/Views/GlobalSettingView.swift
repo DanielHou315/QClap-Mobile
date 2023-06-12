@@ -22,14 +22,11 @@ struct GlobalSettingView: View {
                 NavigationLink {
                     Text("Detail")
                 } label: {
-                    Text("Hello, world!")
+                    Text("Global Settings")
                 }
             }
-            .toolbar {
-                ProjectListToolbar()
-            }
             .padding()
-            .navigationTitle("Projects")
+            .navigationTitle("Global Settings")
             // .navigationBarTitleDisplayMode(.inline)
         }
     }

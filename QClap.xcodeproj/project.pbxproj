@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C036E48E2A36CC5200E1141B /* ToolBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = C036E48D2A36CC5200E1141B /* ToolBarItems.swift */; };
 		C0532AF92A35B39F003039D0 /* StorageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0532AF82A35B39F003039D0 /* StorageAPI.swift */; };
 		C0532AFD2A35B44E003039D0 /* DatabaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0532AFC2A35B44E003039D0 /* DatabaseAPI.swift */; };
 		C0532B012A35B5D3003039D0 /* GlobalSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0532B002A35B5D3003039D0 /* GlobalSettingView.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C036E48D2A36CC5200E1141B /* ToolBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarItems.swift; sourceTree = "<group>"; };
 		C0532AF82A35B39F003039D0 /* StorageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageAPI.swift; sourceTree = "<group>"; };
 		C0532AFC2A35B44E003039D0 /* DatabaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseAPI.swift; sourceTree = "<group>"; };
 		C0532B002A35B5D3003039D0 /* GlobalSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSettingView.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				C0532B062A35B604003039D0 /* LaunchScreen.storyboard */,
 				C0532B082A35B627003039D0 /* StoryboardListView.swift */,
 				C0532B0A2A35B63D003039D0 /* DBEntryView.swift */,
+				C036E48D2A36CC5200E1141B /* ToolBarItems.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C036E48E2A36CC5200E1141B /* ToolBarItems.swift in Sources */,
 				C0780850294031D800A3E3B1 /* ClapperBoardView.swift in Sources */,
 				C0532AF92A35B39F003039D0 /* StorageAPI.swift in Sources */,
 				C078084E294031D800A3E3B1 /* QClapApp.swift in Sources */,
